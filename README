@@ -38,6 +38,3 @@ Example
 
 	@task.completed?
 	# Return true if the task is completed, false if not
-
-Copyright (c) 2008 Rajesh Rajappan, released under the MIT license
-
