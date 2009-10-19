@@ -1,0 +1,43 @@
+Inspired by http://github.com/hashrocket/acts_as_featured/
+
+ActsAsCompleted
+==============
+Allows ActiveRecord models to be specified as completed by updating a `completed_at` datetime (or timestamp) field on the model.
+
+Also provides named scopes for completed and uncompleted finds.
+
+Requires Rails > 2.1.0
+
+Installation
+============
+
+Add a `completed_at` datetime field to any model that you want to be completed.
+
+Example
+=======
+
+	# Add the column
+	./script/generate migration AddCompletedAtToTask completed_at:datetime
+	rake db:migrate
+
+	class Task < ActiveRecord::Base
+	  acts_as_completed
+	end
+
+	Task.completed
+	# SELECT * FROM tasks WHERE tasks.completed_at IS NOT NULL
+
+	Task.uncompleted
+	# SELECT * FROM tasks WHERE tasks.completedd_at IS NULL
+
+	@task.complete!
+	# UPDATE tasks SET completed_at = '2008-07-08 15:58:34' WHERE id = 1
+
+	@task.uncomplete!
+	# UPDATE tasks SET completed_at = NULL WHERE id = 1
+
+	@task.completed?
+	# Return true if the task is completed, false if not
+
+Copyright (c) 2008 Rajesh Rajappan, released under the MIT license
+
